@@ -178,6 +178,8 @@ $$
 
 $$
 \vec{v}_{i}=L_{\min }+\left(U_{\max }-\mathrm{L}_{\min }\right) * \mathrm{ri}=0,1,2, \cdots, \mathrm{N}
+
+\tag1
 $$
 其中：
 
@@ -198,6 +200,8 @@ EO的工作是寻找在控制体积上实现平衡的状态。当EO到达这个�
 
 $$
 \vec{p}_{\text {eqppool }}=\left[\vec{p}_{\text {eq(1) }}, \vec{p}_{\text {eq(2) }}, \vec{p}_{\text {eq(3) }}, \vec{p}_{\text {eq(4) }}, \vec{p}_{\text {eq(avg) }}\right]
+
+\tag2
 $$
 
 ---
@@ -211,10 +215,14 @@ $$
 **以下公式的设计是为了确保EO在探索和开发操作者之间有一个合理的平衡：**
 $$
 \vec{F}=e^{-\vec{\lambda}\left(t-t_{0}\right)}
+
+\tag3
 $$
 其中 $\vec{\lambda}$ 是在（Rooderkerk和van Heerde，2016）的范围内随机生成的一个向量，$t$ 随着迭代逐渐减少，其表述如下：
 $$
 t=\left(1-\frac{i t}{t_{\max }}\right)^{(a 2^{*}\left(\frac{i t}{t_{\max }}\right)}
+
+\tag4
 $$
 其中：
 
@@ -227,6 +235,8 @@ $$
 **作为改善EO的探索和开发能力的另一种尝试，EO还考虑了：**
 $$
 \vec{t}_{0}=\frac{1}{\vec{\lambda}} \ln \left(-a_{1} \operatorname{sign}(\vec{r}-0.5)\left[1-e^{-\vec{\lambda}^{t}}\right)+t\right.
+
+\tag5
 $$
 其中：
 
@@ -239,6 +249,8 @@ $$
 **式(6)描述了将式(5)代入式(3)后对式(3)的修正:**
 $$
 \vec{F}=a_{1} \operatorname{sign}(\vec{r}-0.5)\left[e^{-\vec{\lambda}(t)}-1\right]
+
+\tag6
 $$
 其中：
 
@@ -249,18 +261,25 @@ $$
 **为提高EO的开发能力，提出了R，具体如下：**
 $$
 \vec{R}=\vec{R}_{0} * e^{-\vec{\lambda}^{*}\left(t-t_{0}\right)}
+
+\tag7
 $$
 
 **其中 $R_0$ 为初值，计算公式如下:**
 $$
 \vec{R}_{0}=\overrightarrow{R C P^{*}} *\left(\overrightarrow{c_{e q}}-\vec{\lambda} * \vec{C}\right)
 
-\\
-
-\overrightarrow{R C P}=\left\{\begin{array}{c}0.5 r_{1} r_{2}>R P \\ \text { 0 否则 }\end{array}\right.
+\tag8
 $$
 
-- $r_1$ 和 $r_2$ 是介于 0 和 1 之间的随机数
+$$
+\overrightarrow{R C P}=\left\{\begin{array}{c}0.5 r_{1} r_{2}>R P \\ \text { 0 otherwise }\end{array}\right.
+
+\tag9
+$$
+
+
+
 - $\overrightarrow{R C P}$ 用于确定是否将 $\vec{R}_{0}$ 应用到更新的解决方案。如果 $概率RP$ 小于 $r_2$ ，则应用 $\vec{R}_{0}$，否则不应用 $\vec{R}_{0}$。
 
 
@@ -268,6 +287,8 @@ $$
 **优化过程中的每个解通常会使用以下等式进行更新:**
 $$
 \vec{C}=\overrightarrow{c_{e q}}+\left(\vec{C}-\overrightarrow{c_{e q}}\right) * \vec{F}+\frac{\vec{R}}{\vec{\lambda} * V} *(1-\vec{F})
+
+\tag{10}
 $$
 其中 $V = 1$
 
@@ -296,6 +317,7 @@ Algorithm 1. (EO algorithm)：
 在这一阶段，提出了==𝑁个组==，其中==每个组包含n个粒子（维度）==，这些粒子（维度）被随机初始化为实值 $P_{j}$，$ \mathrm{j}=0,1,2 \cdots n$ ，==$P_{j}$在0到1之间==，然后根据式(11)将 $V_j$ 转换为0或1。求解0-1背包的初始群表示如图1所示。
 $$
 P_{j}=\left\{\begin{array}{l}\text { 1 \ if } \ {P_j}>0.5 \\ \text { 0 \ otherwise }\end{array}\right.
+\tag{11}
 $$
 *Fig. 1. Representation of the initial group:*
 
@@ -375,6 +397,8 @@ $$
 **有八个不同的传递函数，分为S型和V型两类。它们允许将连续值映射为0或1值**。这些传递函数将一个实值作为输入，然后每个函数使用一个特定的公式将这个实值转换为0和1之间的值。之后，位于0和1之间的值使用公式（12）转换为二进制值。每个函数的公式显示在表1中，图2说明了同一类型函数的图形形状。关于这些转移函数的更多信息可在（Mirjalili & Lewis, 2013）找到。应该指出的是，在文献中存在着具有单一传递函数的EO的二元变体。然而，这项工作是在BEO算法中整合八个转移函数的半尝试，并对它们进行彻底的比较。
 $$
 F_{\text {bin }}=\left\{\begin{array}{c}1 \text { if F}(a) \geq \operatorname{rand}() \\ \text { 0 otherwise }\end{array}\right.
+
+\tag{12}
 $$
 ***Table 1. V-Shaped and S-Shaped Transfer Function:***
 
@@ -424,10 +448,14 @@ $$
 我们需要在保持背包容量（见公式（13））的前提下，找到总利润最大化的物品数量（见公式（14））。
 $$
 totalprofit =\sum_{i=1}^{3} x_{i}^{*} p_{i}
+
+\tag{13}
 $$
 
 $$
 capacity =\sum_{i=1}^{3} w_{i}{ }^{*} x_{i}<15
+
+\tag{14}
 $$
 
 开始时，拟议的算法将创建一个由N个解决方案组成的群体，每个解决方案包括d个维度，在我们的例子中d=3。之后，这些解决方案将被随机分配，转移函数被用来将这些连续的解决方案转换成二进制的。作为一个说明性的例子，图4给出了一个由提议创建的解决方案。在创建和初始化这个解决方案后，它将被转换为使用转移函数的二进制。图像显示，在使用转移函数后，得到的二进制解决方案如图5所示。
@@ -578,10 +606,14 @@ Table 4. Benchmark datasets descriptions.
 在表4中，问题一栏包含了我们实验中使用的每个基准实例的名称，容量一栏包含了每个实例的knapsack容量，D一栏显示了小型、中型和大型问题的维数，最后，opt一栏包含了每个实例的最优值。在我们的实验中，我们使用六个标准来评估每个算法的性能：最佳、平均、最差、标准偏差（SD）、成功率（SR）和偏差百分比（PDav（%））。偏差百分比是一个统计测试，用于检查每个算法在多大程度上接近最优解，用以下公式计算。
 $$
 PDav(\%)\geq\frac{opimalalue-fmebaleblebledledt}{opimalvalue}*100
+
+\tag{15}
 $$
 成功率是指一个算法在独立运行中达到最优解的百分比，计算方法如下:
 $$
 \mathrm{SR}(\%)=\frac{\text { number of optimal solution obtained with in the independent runs }}{\text{number of runs}}{ }^{ {*}} 100
+
+\tag{16}
 $$
 最后，我们在本节的实验组织如下。
 1. 实验1：EO配备并测试了之前说明的所有转移函数。
