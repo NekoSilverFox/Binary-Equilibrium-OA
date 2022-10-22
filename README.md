@@ -372,17 +372,121 @@ $$
 
 ## 转移函数
 
-Table 1. V-Shaped and S-Shaped Transfer Function.
+**有八个不同的传递函数，分为S型和V型两类。它们允许将连续值映射为0或1值**。这些传递函数将一个实值作为输入，然后每个函数使用一个特定的公式将这个实值转换为0和1之间的值。之后，位于0和1之间的值使用公式（12）转换为二进制值。每个函数的公式显示在表1中，图2说明了同一函数的图形形状。关于这些转移函数的更多信息可在（Mirjalili & Lewis, 2013）找到。应该指出的是，在文献中存在着具有单一传递函数的EO的二元变体（Kushal等人，2020，Yuangyuan等人，2020，Zheng-Ming等人，2020）。然而，这项工作是在BEO算法中整合八个转移函数的半尝试，并对它们进行彻底的比较。
+$$
+F_{\text {bin }}=\left\{\begin{array}{c}1 \text { if F }(a) \geq \operatorname{rand}() \\ \text { 0 otherwise }\end{array}\right.
+$$
+***Table 1. V-Shaped and S-Shaped Transfer Function:***
 
-![image-20221004112737836](doc/pic/README/image-20221004112737836.png)
+| **V-Shaped**                                                 | **S-Shaped**                                      |
+| ------------------------------------------------------------ | ------------------------------------------------- |
+| $\mathrm{V}1\boldsymbol{F}(\boldsymbol{a})=\left|\frac{2}{\pi}\operatorname{arcTan}\left(\frac{\pi}{2}\mathbf{a}\right)\right|$ | $\mathrm{S} 1 F(a)=\frac{1}{1+e^{-a}} $           |
+| $\mathrm{~V} 2 \boldsymbol{F}(\boldsymbol{a})=|\tanh (\boldsymbol{a})|$ | $\mathrm{S} 2 F(a)=\frac{1}{1+e^{-2 * a}} $       |
+| $\mathrm{~V} 3 \boldsymbol{F}(\boldsymbol{a})=\left|\frac{\mathbf{a}}{\sqrt{1+\boldsymbol{a}^2}}\right|$ | $\mathrm{S} 3 F(a)=\frac{1}{1+e^{-\frac{a}{2}}} $ |
+| $\mathrm{~V} 4 \boldsymbol{F}(\boldsymbol{a})=\left|\operatorname{erf}\left(\frac{\sqrt{\pi}}{2} \boldsymbol{a}\right)\right|$ | $\mathrm{S} 4 F(a)=\frac{1}{1+e^{-\frac{a}{3}}}$  |
 
 
 
+***Fig. 2. (a) S-Shaped and (b) V-Shaped transfer Functions:***
+
+![S-Shaped and (b) V-Shaped transfer Functions](doc/pic/README/S-Shaped and (b) V-Shaped transfer Functions.jpg)
 
 
 
+## 评估
+
+在更新了当前的解决方案之后，更新的解决方案被转换成一个二进制的解决方案，使用之前的一个转移函数，然后用PF来检查它是否是可行的。如果不可行，则应用之前说明的修复算法（RA），将这个不可行的解决方案转换为可行的解决方案。此外，使用改进算法（IA）来改进从修复算法返回的可行方案。如果改进后的方案比以前的方案好，它将被更新到群体中，并在下一代中作为一个个体使用。最后，在算法5中介绍了二进制版本的EO（BEO）。相同步骤的流程图也在图3中描述
+
+**算法5 标准均衡优化器的二进制版本(BEO)：**
+
+<img src="doc/pic/README/image-20221022182550262.png" alt="image-20221022182550262" style="zoom:67%;" />
+
+***图3. 标准均衡优化的二进制版本的步骤：***
+
+![The steps of a binary version of the standard equilibrium optimization](doc/pic/README/The steps of a binary version of the standard equilibrium optimization.jpg)
 
 
+
+## 一个说明性的例子
+
+在清楚地描述了所提出的算法后，在这一节中，假设一个小例子来提高所提出的可读性。假设我们有一个背包，由几个具有不同大小和利润的物品组成，这个背包的容量为15立方英寸（Ezugwu，2019）。我们需要在不破坏容量约束的情况下，在背包中插入能使利润最大化的物品。假设有三个潜在的项目。A、B和C，此外，在表2中给出了它们的权重和利润
+
+**Table 2. Weights and profits of three items：**
+
+| **Items** | **Weights (w)** | **Profits (p)** |
+| --------- | --------------- | --------------- |
+| A         | 2               | 5               |
+| B         | 30              | 10              |
+| C         | 10              | 15              |
+
+我们需要在保持背包容量（见公式（13））的前提下，找到总利润最大化的物品数量（见公式（14））。
+$$
+totalprofit =\sum_{i=1}^{3} x_{i}^{*} p_{i}
+$$
+
+$$
+capacity =\sum_{i=1}^{3} w_{i}{ }^{*} x_{i}<15
+$$
+
+开始时，拟议的算法将创建一个由N个解决方案组成的群体，每个解决方案包括d个维度，在我们的例子中d=3。之后，这些解决方案将被随机分配，转移函数被用来将这些连续的解决方案转换成二进制的。作为一个说明性的例子，图4给出了一个由提议创建的解决方案。在创建和初始化这个解决方案后，它将被转换为使用转移函数的二进制。图像显示，在使用转移函数后，得到的二进制解决方案如图5所示。
+
+***Fig. 4. an initial solution, x.***
+
+<img src="doc/pic/README/Fig. 4. an initial solution, x.jpg" alt="Fig. 4. an initial solution, x" style="zoom:150%;" />
+
+***Fig. 5. The binary solution of the initial solution, x.***
+
+![Fig. 5. The binary solution of the initial solution, x](doc/pic/README/Fig. 5. The binary solution of the initial solution, x.jpg)
+
+计算出二元解后，该解中的0表示不选择该位置的物品，1表示选择。根据图5中给出的二元解，所选项目的总利润计算如下。
+
+$f(x)=0 * 5+1 * 10+1 * 15=25$
+
+
+
+而这个解决方案的容量计算如下。
+
+$capacity =0 * 2+1 * 30+1 * 10=40>15$
+
+在计算了这个解决方案的容量后，我们发现它超过了背包的允许容量，即15。因此，这个不可行的解决方案必须从人口中移除，以避免被选为目前最好的解决方案。为了做到这一点，将调用PF算法，把这个解决方案的适配度转换成一个负值。调用PF算法后，f (x) = - 25，随后这个解决方案将不会被选为最佳解决方案。在我们的建议中，这个不可行的解决方案将使用RA进行修复。在调用RA算法并从这个不可行的解决方案中删除一个具有最低pi/wi的项目后，说这个项目在第二个位置，所以这个不可行的解决方案在RA步骤后将是如下。
+
+***Fig. 6. The repaired binary solution.***
+
+![Fig. 6. The repaired binary solution.](doc/pic/README/Fig. 6. The repaired binary solution..jpg)
+
+根据图6中给出的修复后的二元解，所选项目的总利润计算如下。
+
+$f(x)=0 * 5+0 * 10+1 * 15=15$
+
+
+
+而这个解决方案的容量计算如下。
+
+$capacity =0 * 2+0 * 30+1 * 10=10<15$
+
+---
+
+在计算了这个修复后的方案的容量后，很明显，它小于背包的容量，因此这个方案被认为是可行的。在将不可行的解决方案转换为可行的之后，将使用IA算法对其进行改进。IA算法将把具有最高 $\frac{\mathrm{p}_{i}}{\mathrm{w}_{i}}$ 的项目插入背包，这就是第一个项目。因此，调用IA后，这个可行的解决方案将如下。
+
+
+
+***Fig. 7. The improved repaired binary solution.***
+
+![Fig. 7. The improved repaired binary solution.](doc/pic/README/Fig. 7. The improved repaired binary solution..jpg)
+
+
+
+根据图7中给出的二元解决方案，所选项目的总利润计算如下。
+
+$f(x)=1 * 5+0^{*} 10+1 * 15=20$
+
+
+
+而这个解决方案的容量计算如下。
+
+$capacity =1 * 2+0 * 30+1 * 10=12<15$
+
+很明显，这个改进后的修复方案的容量小于背包的容量，因此，它被认为是一个可行的方案，并被用于下一代的群体。这个例子是在由N个解决方案组成的群体中的一个单一解决方案上进行的，以说明我们的主张的阶段。
 
 
 
