@@ -1,5 +1,28 @@
- <p align="center"><b><font size=5>Алгоритм оптимизации бинарного равновесия для задач 0-1 рюкзака</font></b></p>
- <p align="center"><b>A Binary Equilibrium Optimization Algorithm for 0–1 Knapsack Problems</b></p>
+ <p align="center">
+  <img width="250px"  align="center" src="https://github.com/NekoSilverFox/NekoSilverfox/blob/master/icons/logo_building_spbstu.png?raw=true" align="center" alt="ogo_building_spbstu" />
+  </br></br>
+
+
+  <font size=4>									Санкт-Петербургский политехнический университет Петра Великого</font>
+
+
+ <font size=3>																Институт компьютерных наук и технологий</font>
+
+<b><font size=3>										  						Высшая школа программной инженерии</font></b>
+</p>
+
+
+| Выполнил студент <br />гр. 3530904/90102 | Мэн Цзянин        |
+| :--------------------------------------: | ----------------- |
+|               Руководитель               | Черноруцкий И. Г. |
+
+
+
+---
+
+
+<p align="center"><b><font size=5>Алгоритм оптимизации бинарного равновесия для задач 0-1 рюкзака</font></b></p>
+<p align="center"><b>A Binary Equilibrium Optimization Algorithm for 0–1 Knapsack Problems</b></p>
 
 > <div class="author-group" id="author-group"><span class="sr-only">Author links open overlay panel</span><a class="author size-m workspace-trigger" name="bau005" href="#!"><span class="content"><span class="text given-name">Mohamed</span><span class="text surname">Abdel-Basset</span><span class="author-ref" id="baf005"><sup>a</sup></span><svg role="img" focusable="false" viewBox="0 0 102 128" width="19.125" height="12" class="icon icon-envelope" aria-label="Envelope"><title>Envelope</title><path d="m55.8 57.2c-1.78 1.31-5.14 1.31-6.9 0l-31.32-23.2h69.54l-31.32 23.19zm-55.8-24.78l42.94 32.62c2.64 1.95 6.02 2.93 9.4 2.93s6.78-0.98 9.42-2.93l40.24-30.7v-10.34h-102zm92 56.48l-18.06-22.74-8.04 5.95 17.38 21.89h-64.54l18.38-23.12-8.04-5.96-19.08 24.02v-37.58l-1e1 -8.46v61.1h102v-59.18l-1e1 8.46v35.62"></path></svg></span></a><a class="author size-m workspace-trigger" name="bau010" href="#!"><span class="content"><span class="text given-name">Reda</span><span class="text surname">Mohamed</span><span class="author-ref" id="baf005"><sup>a</sup></span><svg role="img" focusable="false" viewBox="0 0 102 128" width="19.125" height="12" class="icon icon-envelope" aria-label="Envelope"><title>Envelope</title><path d="m55.8 57.2c-1.78 1.31-5.14 1.31-6.9 0l-31.32-23.2h69.54l-31.32 23.19zm-55.8-24.78l42.94 32.62c2.64 1.95 6.02 2.93 9.4 2.93s6.78-0.98 9.42-2.93l40.24-30.7v-10.34h-102zm92 56.48l-18.06-22.74-8.04 5.95 17.38 21.89h-64.54l18.38-23.12-8.04-5.96-19.08 24.02v-37.58l-1e1 -8.46v61.1h102v-59.18l-1e1 8.46v35.62"></path></svg></span></a><a class="author size-m workspace-trigger" name="bau015" href="#!"><span class="content"><span class="text given-name">Seyedali</span><span class="text surname">Mirjalili</span><span class="author-ref" id="baf010"><sup>b</sup></span><span class="author-ref" id="baf015"><sup>c</sup></span><span class="author-ref" id="baf020"><sup>d</sup></span><svg role="img" focusable="false" viewBox="0 0 106 128" width="19.875" height="12" class="icon icon-person" aria-label="Person"><title>Person</title><path d="m11.07 1.2e2l0.84-9.29c1.97-18.79 23.34-22.93 41.09-22.93 17.74 0 39.11 4.13 41.08 22.84l0.84 9.38h10.04l-0.93-10.34c-2.15-20.43-20.14-31.66-51.03-31.66s-48.89 11.22-51.05 31.73l-0.91 10.27h10.03m41.93-102.29c-9.72 0-18.24 8.69-18.24 18.59 0 13.67 7.84 23.98 18.24 23.98s18.24-10.31 18.24-23.98c0-9.9-8.52-18.59-18.24-18.59zm0 52.29c-15.96 0-28-14.48-28-33.67 0-15.36 12.82-28.33 28-28.33s28 12.97 28 28.33c0 19.19-12.04 33.67-28 33.67"></path></svg><span class="author-ref" id="bfn1"><sup>1</sup></span></span></a><dl class="affiliation"><dt><sup>a</sup></dt><dd>Faculty of Computers and Informatics, Zagazig University, Zagazig 44519, Egypt</dd></dl><dl class="affiliation"><dt><sup>b</sup></dt><dd>Center for Artificial Intelligence Research and Optimization, Torrens University Australia, Australia</dd></dl><dl class="affiliation"><dt><sup>c</sup></dt><dd>Yonsei Frontier Lab, Yonsei University, Seoul, Korea</dd></dl><dl class="affiliation"><dt><sup>d</sup></dt><dd>King Abdul Aziz University, Jeddah, Saudi Arabia</dd></dl></div>
 >
