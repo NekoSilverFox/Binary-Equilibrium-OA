@@ -11,6 +11,18 @@ import numpy as np
 from enum import Enum
 from math import atan, sqrt, tanh, erf, e, pi
 from copy import copy
+from KP import *
+import sys, os
+
+
+# Disable
+def blockPrint():
+    sys.stdout = open(os.devnull, 'w')
+
+
+# Restore
+def enablePrint():
+    sys.stdout = sys.__stdout__
 
 
 # 转移函数 V-Shape 和 S-Shape
@@ -142,7 +154,7 @@ def get_weight_table(n: int, min_weight: int, max_weight: int) -> np.ndarray:
 
 
 def get_fitness(arr_binary: np.ndarray, arr_price: np.ndarray, arr_weight: np.ndarray,
-                knapsack_capacity: int) -> np.int32:
+                knapsack_capacity: int) -> int:
     """【Fitness function】获取适应度，也就是放入背包的物品。如果不能放入背包则适应度为负数（惩罚函数）
 
     Args:
@@ -167,9 +179,9 @@ def get_fitness(arr_binary: np.ndarray, arr_price: np.ndarray, arr_weight: np.nd
         sum_weight += arr_weight[i]
 
     if sum_weight > knapsack_capacity:
-        sum_weight = -sum_weight
+        sum_price = -sum_price
 
-    return sum_weight
+    return sum_price
 
 
 def get_index_max_price(arr_price: np.ndarray) -> int:
@@ -409,23 +421,23 @@ def BiEO(tf: TransferFuncion, arr_price: np.ndarray, arr_weight: np.ndarray, kna
                 print(f'[INFO] 调用 RA & IA 且更新后适应度：{fitness}')
 
             if fitness > Ceq_1_fit:
-                print('[INFO] Update Ceq_1')
+                # print('[INFO] Update Ceq_1')
                 Ceq_1_fit = fitness
                 Ceq_1 = copy(C[i])
             elif (fitness < Ceq_1_fit) and (fitness > Ceq_2_fit):
-                print('[INFO] Update Ceq_2')
+                # print('[INFO] Update Ceq_2')
                 Ceq_2_fit = fitness
                 Ceq_2 = copy(C[i])
             elif (fitness < Ceq_1_fit) and (fitness < Ceq_2_fit) and (fitness > Ceq_3_fit):
-                print('[INFO] Update Ceq_3')
+                # print('[INFO] Update Ceq_3')
                 Ceq_3_fit = fitness
                 Ceq_3 = copy(C[i])
             elif (fitness < Ceq_1_fit) and (fitness < Ceq_2_fit) and (fitness < Ceq_3_fit) and (fitness > Ceq_4_fit):
-                print('[INFO] Update Ceq_4')
+                # print('[INFO] Update Ceq_4')
                 Ceq_4_fit = fitness
                 Ceq_4 = copy(C[i])
             else:
-                print('[INFO] 未更新 Ceq')
+                # print('[INFO] 未更新 Ceq')
                 pass
             print(f'[INFO] 当前Ceq1 ~ Ceq_4 候选者适应度: \n'
                   f'\tCeq_1_fit: {Ceq_1_fit}\n'
@@ -451,7 +463,7 @@ def BiEO(tf: TransferFuncion, arr_price: np.ndarray, arr_weight: np.ndarray, kna
             GCP = 0.5 * np.random.random() * np.ones(num_particles_every_group) * (np.random.random() > GP)  # Eq(9)
             G_0 = GCP * (Ceq - lambda_F * C[i])  # Eq(8)
             G = G_0 * F  # Eq(7)
-            C[i] = (C[i] - Ceq) * F + (G / lambda_F) * (1 - F)  # Eq(10)
+            C[i] = Ceq + (C[i] - Ceq) * F + (G / lambda_F) * (1 - F)  # Eq(10)
 
         it += 1
 
@@ -472,42 +484,39 @@ if __name__ == '__main__':
     # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 在此设置参数 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    min_price = 5  # 一个物体最小的价值
-    max_price = 30  # 一个物体最大的价值
 
-    min_weight = 5  # 一个物体最小的重量（体积）
-    max_weight = 20  # 一个物体最大的重量（体积）
 
-    knapsack_capacity = 60  # 背包体积
+    arr_tf = [TransferFuncion.V1, TransferFuncion.V2, TransferFuncion.V3, TransferFuncion.V4,
+              TransferFuncion.S1, TransferFuncion.S2, TransferFuncion.S3, TransferFuncion.S4]
+    arr_kp_c = [KP_1_c, KP_2_c, KP_3_c, KP_4_c, KP_5_c, KP_6_c, KP_7_c, KP_8_c, KP_9_c, KP_10_c,
+                KP_11_c, KP_12_c, KP_13_c, KP_14_c, KP_15_c, KP_16_c, KP_17_c, KP_18_c, KP_19_c, KP_20_c]
+    arr_w = [KP_1_w, KP_2_w, KP_3_w, KP_4_w, KP_5_w, KP_6_w, KP_7_w, KP_8_w, KP_9_w, KP_10_w,
+             KP_11_w, KP_12_w, KP_13_w, KP_14_w, KP_15_w, KP_16_w, KP_17_w, KP_18_w, KP_19_w, KP_20_w]
+    arr_v = [KP_1_v, KP_2_v, KP_3_v, KP_4_v, KP_5_v, KP_6_v, KP_7_v, KP_8_v, KP_9_v, KP_10_v,
+             KP_11_v, KP_12_v, KP_13_v, KP_14_v, KP_15_v, KP_16_v, KP_17_v, KP_18_v, KP_19_v, KP_20_v]
 
-    num_groups_particle = 20  # 几组粒子
-    num_particles_every_group = 10  # 每组里有多少个粒子（dim 维度）
-    arr_price = get_price_table(n=num_particles_every_group,
-                                min_price=min_price,
-                                max_price=max_price)
-    arr_weight = get_weight_table(n=num_particles_every_group,
-                                    min_weight=min_weight,
-                                    max_weight=max_weight)
-    """调用 BiEO 算法"""
-    C_pool = BiEO(tf=TransferFuncion.V2,
-                  arr_price=arr_price,
-                  arr_weight=arr_weight,
-                  knapsack_capacity=knapsack_capacity,
-                  num_groups_particle=5,  # [20]
-                  num_runs=3,  # [20]
-                  max_iters=10,  # [5000]
-                  a_1=3,  # [3]
-                  a_2=1,  # [1]
-                  GP=0.5)
+    arr_res = np.zeros(shape=(20, 8))
+    for i in range(20):
+        # print(f'\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%% i: {i} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+        print('\n')
 
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 迭代结束 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    Ceq_1_fit = get_fitness(arr_binary=C_pool[0], arr_price=arr_price, arr_weight=arr_weight, knapsack_capacity=knapsack_capacity)
-    Ceq_2_fit = get_fitness(arr_binary=C_pool[1], arr_price=arr_price, arr_weight=arr_weight, knapsack_capacity=knapsack_capacity)
-    Ceq_3_fit = get_fitness(arr_binary=C_pool[2], arr_price=arr_price, arr_weight=arr_weight, knapsack_capacity=knapsack_capacity)
-    Ceq_4_fit = get_fitness(arr_binary=C_pool[3], arr_price=arr_price, arr_weight=arr_weight, knapsack_capacity=knapsack_capacity)
-    print(f'4个最优解：\n'
-          f'\tCeq_1: {C_pool[0]}\t|\tCeq_1_fit: {Ceq_1_fit}\n'
-          f'\tCeq_2: {C_pool[1]}\t|\tCeq_2_fit: {Ceq_2_fit}\n'
-          f'\tCeq_3: {C_pool[2]}\t|\tCeq_3_fit: {Ceq_3_fit}\n'
-          f'\tCeq_4: {C_pool[3]}\t|\tCeq_4_fit: {Ceq_4_fit}\n'
-          f'\tCeq_avg_fit: {(Ceq_1_fit + Ceq_2_fit + Ceq_3_fit + Ceq_4_fit) / 4}\n')
+        for j in range(8):
+            """调用 BiEO 算法"""
+            blockPrint()
+            C_pool = BiEO(tf=arr_tf[j],
+                          arr_price=arr_v[i],
+                          arr_weight=arr_w[i],
+                          knapsack_capacity=arr_kp_c[i],
+                          num_groups_particle=20,  # [20]
+                          num_runs=20,  # [20]
+                          max_iters=50,  # [5000]
+                          a_1=3,  # [3]
+                          a_2=1,  # [1]
+                          GP=0.5)
+            enablePrint()
+
+            # print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 迭代结束 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+            result = round(get_fitness(C_pool[0], arr_v[i], arr_w[i], arr_kp_c[i]))
+            arr_res[i, j] = result
+            print(f'[INFO] 迭代结束 (数据集：KP_{i + 1}\t转移函数：{arr_tf[j]})-最优解 Ceq_avg_fit: {result}')
+    print(f'result:\n{arr_res}')
