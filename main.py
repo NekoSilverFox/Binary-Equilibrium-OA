@@ -80,11 +80,21 @@ def initialization(Particles_no: int, dim: int) -> np.ndarray:
 
     for i in range(Particles_no):
         for j in range(dim):
-            if np.random.rand() <= 0.5:
+            if np.random.rand() > 0.5:
                 C[i, j] = 0
             else:
                 C[i, j] = 1
+
     return C
+
+
+def arr2bin(arr: np.ndarray, tf: TransferFuncion) -> np.ndarray:
+    for i in range(arr.shape[0]):
+        if transfer_function(tf, arr[i]) >= np.random.rand():
+            arr[i] = 0
+        else:
+            arr[i] = 1
+    return arr
 
 
 def get_price_table(n: int, min_price: int, max_price: int) -> np.ndarray:
@@ -315,38 +325,36 @@ def printSV():
     plt.show()
 
 
-if __name__ == '__main__':
-    print('==================== main start ====================')
-    # printSV()
+def BiEO(tf: TransferFuncion, arr_price: np.ndarray, arr_weight: np.ndarray, knapsack_capacity: int,
+         num_groups_particle: int, num_runs: int, max_iters: int, a_1: int, a_2: int, GP: float) -> np.ndarray:
+    """
+    二元优化算法
+    :param tf: 转移函数
+    :param arr_price:  价值表
+    :param arr_weight: 重量表
+    :param knapsack_capacity: 背包容量
+    :param num_groups_particle: 粒子群数量
+    :param num_runs: 运行次数
+    :param max_iters: 最大迭代次数
+    :param a_1: 探索能力
+    :param a_2: 开发能力
+    :param GP: 生成率
+    :return: 最终取得的候选池 (Ceq, pool)
+    """
 
-    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 在此设置参数 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     print('\n[INFO] -------------- 初始化变量 --------------')
-    min_price = 5  # 一个物体最小的价值
-    max_price = 30  # 一个物体最大的价值
-
-    min_weight = 5  # 一个物体最小的重量（体积）
-    max_weight = 20  # 一个物体最大的重量（体积）
-
-    knapsack_capacity = 60  # 背包体积
-
-    num_groups_particle = 20  # 几组粒子
-    num_particles_every_group = 10  # 每组里有多少个粒子（dim 维度）
-
+    num_particles_every_group = arr_weight.shape[0]
     print(f'初始化背包：\n'
-          f'\t物品价值: [{min_price}, {max_price}]\n'
-          f'\t物品重量: [{min_weight}, {max_weight}]\n'
           f'\t背包体积: {knapsack_capacity}\n'
           f'\t粒子组数量: {num_groups_particle}\n'
           f'\t每组中物品个数(dim维度): {num_particles_every_group}\n')
 
-    num_runs = 20
-    max_iters = 5000
-    a_1 = 3
-    a_2 = 1
-    tf = TransferFuncion.V2
-    GP = 0.5
+    print('\n[INFO] -------------- 价值表 --------------')
+    print(f'{arr_price}')
+
+    print('\n[INFO] -------------- 重量表 --------------')
+    print(f'{arr_weight}')
+
     print(f'初始化 BiEO 参数：\n'
           f'\t运行次数: {num_runs}\n'
           f'\t每次运行中迭代次数: {max_iters}\n'
@@ -354,19 +362,6 @@ if __name__ == '__main__':
           f'\ta_2: {a_2}\n'
           f'\t转移函数: {tf}\n'
           f'\tGP: {GP}')
-    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-    print('\n[INFO] -------------- 初始化价值表 --------------')
-    arr_price = get_price_table(n=num_particles_every_group,
-                                min_price=min_price,
-                                max_price=max_price)
-    print(f'{arr_price}')
-
-    print('\n[INFO] -------------- 初始化重量表 --------------')
-    arr_weight = get_weight_table(n=num_particles_every_group,
-                                  min_weight=min_weight,
-                                  max_weight=max_weight)
-    print(f'{arr_weight}')
 
     print('\n[INFO] -------------- 初始化粒子群C --------------')
     C = initialization(num_groups_particle, num_particles_every_group)  # 0-1 值，物品是否放入背包
@@ -398,44 +393,48 @@ if __name__ == '__main__':
     while it <= max_iters:
         print(f'\n[INFO] -------------------- 当前迭代 {it}/{max_iters} --------------------')
 
-        for i in C:
-            #TODO 补充 Alg5 中转移函数的使用，算法第六行
-            fitness = get_fitness(arr_binary=i, arr_price=arr_price, arr_weight=arr_weight, knapsack_capacity=knapsack_capacity)
+        for i in range(C.shape[0]):
+            C[i] = arr2bin(arr=C[i], tf=tf)
+            fitness = get_fitness(arr_binary=C[i], arr_price=arr_price, arr_weight=arr_weight,
+                                  knapsack_capacity=knapsack_capacity)
             print(f'\n[INFO] 当前粒子群适应度：{fitness}')
 
             if fitness < 0:
-                i = repari_alg(arr_binary=i, arr_price=arr_price, arr_weight=arr_weight, knapsack_capacity=knapsack_capacity)
-                i = improvement_alg(arr_binary=i, arr_price=arr_price, arr_weight=arr_weight, knapsack_capacity=knapsack_capacity)
-                fitness = get_fitness(arr_binary=i, arr_price=arr_price, arr_weight=arr_weight, knapsack_capacity=knapsack_capacity)
+                C[i] = repari_alg(arr_binary=C[i], arr_price=arr_price, arr_weight=arr_weight,
+                                  knapsack_capacity=knapsack_capacity)
+                C[i] = improvement_alg(arr_binary=C[i], arr_price=arr_price, arr_weight=arr_weight,
+                                       knapsack_capacity=knapsack_capacity)
+                fitness = get_fitness(arr_binary=C[i], arr_price=arr_price, arr_weight=arr_weight,
+                                      knapsack_capacity=knapsack_capacity)
                 print(f'[INFO] 调用 RA & IA 且更新后适应度：{fitness}')
 
             if fitness > Ceq_1_fit:
                 print('[INFO] Update Ceq_1')
                 Ceq_1_fit = fitness
-                Ceq_1 = i
+                Ceq_1 = copy(C[i])
             elif (fitness < Ceq_1_fit) and (fitness > Ceq_2_fit):
                 print('[INFO] Update Ceq_2')
                 Ceq_2_fit = fitness
-                Ceq_2 = i
+                Ceq_2 = copy(C[i])
             elif (fitness < Ceq_1_fit) and (fitness < Ceq_2_fit) and (fitness > Ceq_3_fit):
                 print('[INFO] Update Ceq_3')
                 Ceq_3_fit = fitness
-                Ceq_3 = i
+                Ceq_3 = copy(C[i])
             elif (fitness < Ceq_1_fit) and (fitness < Ceq_2_fit) and (fitness < Ceq_3_fit) and (fitness > Ceq_4_fit):
                 print('[INFO] Update Ceq_4')
                 Ceq_4_fit = fitness
-                Ceq_4 = i
+                Ceq_4 = copy(C[i])
             else:
                 print('[INFO] 未更新 Ceq')
                 pass
-            # print(f'[INFO] 当前Ceq1 ~ Ceq_4 候选者适应度: \n'
-            #       f'\tCeq_1_fit: {Ceq_1_fit}\n'
-            #       f'\tCeq_2_fit: {Ceq_2_fit}\n'
-            #       f'\tCeq_3_fit: {Ceq_3_fit}\n'
-            #       f'\tCeq_4_fit: {Ceq_4_fit}\n')
+            print(f'[INFO] 当前Ceq1 ~ Ceq_4 候选者适应度: \n'
+                  f'\tCeq_1_fit: {Ceq_1_fit}\n'
+                  f'\tCeq_2_fit: {Ceq_2_fit}\n'
+                  f'\tCeq_3_fit: {Ceq_3_fit}\n'
+                  f'\tCeq_4_fit: {Ceq_4_fit}\n')
 
         Ceq_ave = np.round((Ceq_1 + Ceq_2 + Ceq_3 + Ceq_4) / 4)  # 均衡池候选者的平均值
-        C_pool = np.array([Ceq_1, Ceq_2, Ceq_3, Ceq_4, Ceq_ave]) # 均衡池
+        C_pool = np.array([Ceq_1, Ceq_2, Ceq_3, Ceq_4, Ceq_ave])  # 均衡池
         print(f'[INFO] 当前均衡池: \n'
               f'\tCeq_1: {C_pool[0]}\t|\tCeq_1_fit: {Ceq_1_fit}\n'
               f'\tCeq_2: {C_pool[1]}\t|\tCeq_2_fit: {Ceq_2_fit}\n'
@@ -444,18 +443,17 @@ if __name__ == '__main__':
               f'\tCeq_ave: {C_pool[4]}\n')
 
         t = (1 - it / max_iters) ** (a_2 * it / max_iters)  # Eq(4)
-        for i in C:
+        for i in range(C.shape[0]):
             Ceq = C_pool[np.random.randint(C_pool.shape[0])]  # 从均衡池中随机抽取一个
             lambda_F = np.random.random(num_particles_every_group)
             r = np.random.random(num_particles_every_group)
             F = a_1 * np.sign(r - 0.5) * (np.exp(-lambda_F * t) - 1)  # Eq(6)
             GCP = 0.5 * np.random.random() * np.ones(num_particles_every_group) * (np.random.random() > GP)  # Eq(9)
-            G_0 = GCP * (Ceq - lambda_F * i)  # Eq(8)
+            G_0 = GCP * (Ceq - lambda_F * C[i])  # Eq(8)
             G = G_0 * F  # Eq(7)
-            i = (i - Ceq) * F + (G / lambda_F) * (1 - F)  # Eq(10)
+            C[i] = (C[i] - Ceq) * F + (G / lambda_F) * (1 - F)  # Eq(10)
 
         it += 1
-    pass
 
     print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 迭代结束 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
     print(f'4个最优解：\n'
@@ -463,4 +461,52 @@ if __name__ == '__main__':
           f'\tCeq_2: {C_pool[1]}\t|\tCeq_2_fit: {Ceq_2_fit}\n'
           f'\tCeq_3: {C_pool[2]}\t|\tCeq_3_fit: {Ceq_3_fit}\n'
           f'\tCeq_4: {C_pool[3]}\t|\tCeq_4_fit: {Ceq_4_fit}\n'
-          f'\tCeq_ave: {C_pool[4]}\t|\tCeq_avg_fit: {get_fitness(C_pool[4], arr_price, arr_weight, knapsack_capacity)}\n')
+          f'\tCeq_avg_fit: {(Ceq_1_fit + Ceq_2_fit + Ceq_3_fit + Ceq_4_fit) / 4}\n')
+
+    return C_pool
+
+
+if __name__ == '__main__':
+    print('==================== main start ====================')
+
+    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 在此设置参数 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    min_price = 5  # 一个物体最小的价值
+    max_price = 30  # 一个物体最大的价值
+
+    min_weight = 5  # 一个物体最小的重量（体积）
+    max_weight = 20  # 一个物体最大的重量（体积）
+
+    knapsack_capacity = 60  # 背包体积
+
+    num_groups_particle = 20  # 几组粒子
+    num_particles_every_group = 10  # 每组里有多少个粒子（dim 维度）
+    arr_price = get_price_table(n=num_particles_every_group,
+                                min_price=min_price,
+                                max_price=max_price)
+    arr_weight = get_weight_table(n=num_particles_every_group,
+                                    min_weight=min_weight,
+                                    max_weight=max_weight)
+    """调用 BiEO 算法"""
+    C_pool = BiEO(tf=TransferFuncion.V2,
+                  arr_price=arr_price,
+                  arr_weight=arr_weight,
+                  knapsack_capacity=knapsack_capacity,
+                  num_groups_particle=5,  # [20]
+                  num_runs=3,  # [20]
+                  max_iters=10,  # [5000]
+                  a_1=3,  # [3]
+                  a_2=1,  # [1]
+                  GP=0.5)
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 迭代结束 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    Ceq_1_fit = get_fitness(arr_binary=C_pool[0], arr_price=arr_price, arr_weight=arr_weight, knapsack_capacity=knapsack_capacity)
+    Ceq_2_fit = get_fitness(arr_binary=C_pool[1], arr_price=arr_price, arr_weight=arr_weight, knapsack_capacity=knapsack_capacity)
+    Ceq_3_fit = get_fitness(arr_binary=C_pool[2], arr_price=arr_price, arr_weight=arr_weight, knapsack_capacity=knapsack_capacity)
+    Ceq_4_fit = get_fitness(arr_binary=C_pool[3], arr_price=arr_price, arr_weight=arr_weight, knapsack_capacity=knapsack_capacity)
+    print(f'4个最优解：\n'
+          f'\tCeq_1: {C_pool[0]}\t|\tCeq_1_fit: {Ceq_1_fit}\n'
+          f'\tCeq_2: {C_pool[1]}\t|\tCeq_2_fit: {Ceq_2_fit}\n'
+          f'\tCeq_3: {C_pool[2]}\t|\tCeq_3_fit: {Ceq_3_fit}\n'
+          f'\tCeq_4: {C_pool[3]}\t|\tCeq_4_fit: {Ceq_4_fit}\n'
+          f'\tCeq_avg_fit: {(Ceq_1_fit + Ceq_2_fit + Ceq_3_fit + Ceq_4_fit) / 4}\n')
