@@ -331,7 +331,7 @@ if __name__ == '__main__':
 
     knapsack_capacity = 60  # 背包体积
 
-    num_groups_particle = 5  # 几组粒子
+    num_groups_particle = 20  # 几组粒子
     num_particles_every_group = 10  # 每组里有多少个粒子（dim 维度）
 
     print(f'初始化背包：\n'
@@ -342,7 +342,7 @@ if __name__ == '__main__':
           f'\t每组中物品个数(dim维度): {num_particles_every_group}\n')
 
     num_runs = 20
-    max_iters = 50
+    max_iters = 5000
     a_1 = 3
     a_2 = 1
     tf = TransferFuncion.V2
@@ -394,6 +394,7 @@ if __name__ == '__main__':
 
     print('=============================== BiEO 开始迭代 ===============================')
     it = 1
+    C_pool = None
     while it <= max_iters:
         print(f'\n[INFO] -------------------- 当前迭代 {it}/{max_iters} --------------------')
 
@@ -420,7 +421,7 @@ if __name__ == '__main__':
                 print('[INFO] Update Ceq_3')
                 Ceq_3_fit = fitness
                 Ceq_3 = i
-            elif (fitness < Ceq_1_fit) and (fitness < Ceq_2_fit) and (fitness > Ceq_3_fit) and (fitness > Ceq_4_fit):
+            elif (fitness < Ceq_1_fit) and (fitness < Ceq_2_fit) and (fitness < Ceq_3_fit) and (fitness > Ceq_4_fit):
                 print('[INFO] Update Ceq_4')
                 Ceq_4_fit = fitness
                 Ceq_4 = i
@@ -455,3 +456,11 @@ if __name__ == '__main__':
 
         it += 1
     pass
+
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 迭代结束 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    print(f'4个最优解：\n'
+          f'\tCeq_1: {C_pool[0]}\t|\tCeq_1_fit: {Ceq_1_fit}\n'
+          f'\tCeq_2: {C_pool[1]}\t|\tCeq_2_fit: {Ceq_2_fit}\n'
+          f'\tCeq_3: {C_pool[2]}\t|\tCeq_3_fit: {Ceq_3_fit}\n'
+          f'\tCeq_4: {C_pool[3]}\t|\tCeq_4_fit: {Ceq_4_fit}\n'
+          f'\tCeq_ave: {C_pool[4]}\t|\tCeq_avg_fit: {get_fitness(C_pool[4], arr_price, arr_weight, knapsack_capacity)}\n')
