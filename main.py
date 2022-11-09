@@ -499,6 +499,7 @@ if __name__ == '__main__':
                   a_1=3,  # [3]
                   a_2=1,  # [1]
                   GP=0.5)
+
     print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 迭代结束 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
     Ceq_1_fit = get_fitness(arr_binary=C_pool[0], arr_price=arr_price, arr_weight=arr_weight, knapsack_capacity=knapsack_capacity)
     Ceq_2_fit = get_fitness(arr_binary=C_pool[1], arr_price=arr_price, arr_weight=arr_weight, knapsack_capacity=knapsack_capacity)
