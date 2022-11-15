@@ -486,8 +486,8 @@ if __name__ == '__main__':
     # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
-    arr_tf = [TransferFuncion.V1, TransferFuncion.V2, TransferFuncion.V3, TransferFuncion.V4,
-              TransferFuncion.S1, TransferFuncion.S2, TransferFuncion.S3, TransferFuncion.S4]
+    arr_tf = [TransferFuncion.S1, TransferFuncion.S2, TransferFuncion.S3, TransferFuncion.S4,
+              TransferFuncion.V1, TransferFuncion.V2, TransferFuncion.V3, TransferFuncion.V4]
     arr_kp_c = [KP_1_c, KP_2_c, KP_3_c, KP_4_c, KP_5_c, KP_6_c, KP_7_c, KP_8_c, KP_9_c, KP_10_c,
                 KP_11_c, KP_12_c, KP_13_c, KP_14_c, KP_15_c, KP_16_c, KP_17_c, KP_18_c, KP_19_c, KP_20_c]
     arr_w = [KP_1_w, KP_2_w, KP_3_w, KP_4_w, KP_5_w, KP_6_w, KP_7_w, KP_8_w, KP_9_w, KP_10_w,
@@ -495,28 +495,32 @@ if __name__ == '__main__':
     arr_v = [KP_1_v, KP_2_v, KP_3_v, KP_4_v, KP_5_v, KP_6_v, KP_7_v, KP_8_v, KP_9_v, KP_10_v,
              KP_11_v, KP_12_v, KP_13_v, KP_14_v, KP_15_v, KP_16_v, KP_17_v, KP_18_v, KP_19_v, KP_20_v]
 
+    cur_res = np.zeros(shape=(20, 8))
     arr_res = np.zeros(shape=(20, 8))
-    for i in range(20):
-        # print(f'\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%% i: {i} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-        print('\n')
+    for num_run in range(20):  # runs
+        for i in range(20):
+            # print(f'\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%% i: {i} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+            print('\n')
 
-        for j in range(8):
-            """调用 BiEO 算法"""
-            blockPrint()
-            C_pool = BiEO(tf=arr_tf[j],
-                          arr_price=arr_v[i],
-                          arr_weight=arr_w[i],
-                          knapsack_capacity=arr_kp_c[i],
-                          num_groups_particle=20,  # [20]
-                          num_runs=20,  # [20]
-                          max_iters=50,  # [5000]
-                          a_1=3,  # [3]
-                          a_2=1,  # [1]
-                          GP=0.5)
-            enablePrint()
+            for j in range(8):
+                """调用 BiEO 算法"""
+                blockPrint()
+                C_pool = BiEO(tf=arr_tf[j],
+                              arr_price=arr_v[i],
+                              arr_weight=arr_w[i],
+                              knapsack_capacity=arr_kp_c[i],
+                              num_groups_particle=20,  # [20]
+                              num_runs=20,  # [20]
+                              max_iters=5000,  # [5000]
+                              a_1=1,  # [3]
+                              a_2=3,  # [1]
+                              GP=0.5)
+                enablePrint()
 
-            # print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 迭代结束 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-            result = round(get_fitness(C_pool[0], arr_v[i], arr_w[i], arr_kp_c[i]))
-            arr_res[i, j] = result
-            print(f'[INFO] 迭代结束 (数据集：KP_{i + 1}\t转移函数：{arr_tf[j]})-最优解 Ceq_avg_fit: {result}')
+                # print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 迭代结束 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+                cur_best_fitness = round(get_fitness(C_pool[0], arr_v[i], arr_w[i], arr_kp_c[i]))
+                cur_res[i, j] = cur_best_fitness
+                print(f'[INFO] run:{num_run} 迭代结束 (数据集：KP_{i + 1}\t转移函数：{arr_tf[j]})-最优解 Ceq_avg_fit: {cur_best_fitness}')
+        arr_res = np.maximum(arr_res, cur_res)
+
     print(f'result:\n{arr_res}')

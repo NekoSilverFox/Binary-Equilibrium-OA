@@ -1,223 +1,24 @@
 /Users/fox/miniforge3/envs/tensorflow/bin/python /Users/fox/雪狸的文件/Programma/Binary-Equilibrium-OA/main.py
 ==================== main start ====================
-
-
-[INFO] 迭代结束 (数据集：KP_1	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 268
-[INFO] 迭代结束 (数据集：KP_1	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 268
-[INFO] 迭代结束 (数据集：KP_1	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 268
-[INFO] 迭代结束 (数据集：KP_1	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 268
-[INFO] 迭代结束 (数据集：KP_1	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 268
-[INFO] 迭代结束 (数据集：KP_1	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 268
-[INFO] 迭代结束 (数据集：KP_1	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 268
-[INFO] 迭代结束 (数据集：KP_1	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 268
-
-
-[INFO] 迭代结束 (数据集：KP_2	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 876
-[INFO] 迭代结束 (数据集：KP_2	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 876
-[INFO] 迭代结束 (数据集：KP_2	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 876
-[INFO] 迭代结束 (数据集：KP_2	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 876
-[INFO] 迭代结束 (数据集：KP_2	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 876
-[INFO] 迭代结束 (数据集：KP_2	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 876
-[INFO] 迭代结束 (数据集：KP_2	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 876
-[INFO] 迭代结束 (数据集：KP_2	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 876
-
-
-[INFO] 迭代结束 (数据集：KP_3	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 17
-[INFO] 迭代结束 (数据集：KP_3	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 17
-[INFO] 迭代结束 (数据集：KP_3	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 17
-[INFO] 迭代结束 (数据集：KP_3	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 17
-[INFO] 迭代结束 (数据集：KP_3	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 17
-[INFO] 迭代结束 (数据集：KP_3	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 17
-[INFO] 迭代结束 (数据集：KP_3	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 17
-[INFO] 迭代结束 (数据集：KP_3	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 17
-
-
-[INFO] 迭代结束 (数据集：KP_4	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 10
-[INFO] 迭代结束 (数据集：KP_4	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 10
-[INFO] 迭代结束 (数据集：KP_4	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 10
-[INFO] 迭代结束 (数据集：KP_4	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 10
-[INFO] 迭代结束 (数据集：KP_4	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 10
-[INFO] 迭代结束 (数据集：KP_4	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 10
-[INFO] 迭代结束 (数据集：KP_4	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 10
-[INFO] 迭代结束 (数据集：KP_4	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 10
-
-
-[INFO] 迭代结束 (数据集：KP_5	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 375
-[INFO] 迭代结束 (数据集：KP_5	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 375
-[INFO] 迭代结束 (数据集：KP_5	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 375
-[INFO] 迭代结束 (数据集：KP_5	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 375
-[INFO] 迭代结束 (数据集：KP_5	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 375
-[INFO] 迭代结束 (数据集：KP_5	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 375
-[INFO] 迭代结束 (数据集：KP_5	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 375
-[INFO] 迭代结束 (数据集：KP_5	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 375
-
-
-[INFO] 迭代结束 (数据集：KP_6	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 58
-[INFO] 迭代结束 (数据集：KP_6	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 58
-[INFO] 迭代结束 (数据集：KP_6	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 58
-[INFO] 迭代结束 (数据集：KP_6	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 58
-[INFO] 迭代结束 (数据集：KP_6	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 58
-[INFO] 迭代结束 (数据集：KP_6	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 58
-[INFO] 迭代结束 (数据集：KP_6	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 58
-[INFO] 迭代结束 (数据集：KP_6	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 58
-
-
-[INFO] 迭代结束 (数据集：KP_7	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 48
-[INFO] 迭代结束 (数据集：KP_7	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 48
-[INFO] 迭代结束 (数据集：KP_7	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 48
-[INFO] 迭代结束 (数据集：KP_7	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 48
-[INFO] 迭代结束 (数据集：KP_7	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 48
-[INFO] 迭代结束 (数据集：KP_7	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 48
-[INFO] 迭代结束 (数据集：KP_7	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 48
-[INFO] 迭代结束 (数据集：KP_7	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 48
-
-
-[INFO] 迭代结束 (数据集：KP_8	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 9776
-[INFO] 迭代结束 (数据集：KP_8	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 9776
-[INFO] 迭代结束 (数据集：KP_8	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 9776
-[INFO] 迭代结束 (数据集：KP_8	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 9776
-[INFO] 迭代结束 (数据集：KP_8	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 9776
-[INFO] 迭代结束 (数据集：KP_8	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 9776
-[INFO] 迭代结束 (数据集：KP_8	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 9776
-[INFO] 迭代结束 (数据集：KP_8	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 9776
-
-
-[INFO] 迭代结束 (数据集：KP_9	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 72
-[INFO] 迭代结束 (数据集：KP_9	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 72
-[INFO] 迭代结束 (数据集：KP_9	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 72
-[INFO] 迭代结束 (数据集：KP_9	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 72
-[INFO] 迭代结束 (数据集：KP_9	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 72
-[INFO] 迭代结束 (数据集：KP_9	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 72
-[INFO] 迭代结束 (数据集：KP_9	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 72
-[INFO] 迭代结束 (数据集：KP_9	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 72
-
-
-[INFO] 迭代结束 (数据集：KP_10	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 878
-[INFO] 迭代结束 (数据集：KP_10	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 878
-[INFO] 迭代结束 (数据集：KP_10	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 878
-[INFO] 迭代结束 (数据集：KP_10	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 878
-[INFO] 迭代结束 (数据集：KP_10	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 878
-[INFO] 迭代结束 (数据集：KP_10	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 878
-[INFO] 迭代结束 (数据集：KP_10	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 878
-[INFO] 迭代结束 (数据集：KP_10	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 878
-
-
-[INFO] 迭代结束 (数据集：KP_11	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 576
-[INFO] 迭代结束 (数据集：KP_11	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 576
-[INFO] 迭代结束 (数据集：KP_11	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 576
-[INFO] 迭代结束 (数据集：KP_11	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 576
-[INFO] 迭代结束 (数据集：KP_11	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 576
-[INFO] 迭代结束 (数据集：KP_11	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 576
-[INFO] 迭代结束 (数据集：KP_11	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 576
-[INFO] 迭代结束 (数据集：KP_11	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 576
-
-
-[INFO] 迭代结束 (数据集：KP_12	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 654
-[INFO] 迭代结束 (数据集：KP_12	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 654
-[INFO] 迭代结束 (数据集：KP_12	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 654
-[INFO] 迭代结束 (数据集：KP_12	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 654
-[INFO] 迭代结束 (数据集：KP_12	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 654
-[INFO] 迭代结束 (数据集：KP_12	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 654
-[INFO] 迭代结束 (数据集：KP_12	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 654
-[INFO] 迭代结束 (数据集：KP_12	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 654
-
-
-[INFO] 迭代结束 (数据集：KP_13	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 818
-[INFO] 迭代结束 (数据集：KP_13	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 818
-[INFO] 迭代结束 (数据集：KP_13	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 818
-[INFO] 迭代结束 (数据集：KP_13	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 818
-[INFO] 迭代结束 (数据集：KP_13	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 818
-[INFO] 迭代结束 (数据集：KP_13	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 818
-[INFO] 迭代结束 (数据集：KP_13	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 818
-[INFO] 迭代结束 (数据集：KP_13	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 818
-
-
-[INFO] 迭代结束 (数据集：KP_14	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 906
-[INFO] 迭代结束 (数据集：KP_14	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 906
-[INFO] 迭代结束 (数据集：KP_14	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 906
-[INFO] 迭代结束 (数据集：KP_14	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 906
-[INFO] 迭代结束 (数据集：KP_14	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 906
-[INFO] 迭代结束 (数据集：KP_14	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 906
-[INFO] 迭代结束 (数据集：KP_14	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 906
-[INFO] 迭代结束 (数据集：KP_14	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 906
-
-
-[INFO] 迭代结束 (数据集：KP_15	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 880
-[INFO] 迭代结束 (数据集：KP_15	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 880
-[INFO] 迭代结束 (数据集：KP_15	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 880
-[INFO] 迭代结束 (数据集：KP_15	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 880
-[INFO] 迭代结束 (数据集：KP_15	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 880
-[INFO] 迭代结束 (数据集：KP_15	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 880
-[INFO] 迭代结束 (数据集：KP_15	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 880
-[INFO] 迭代结束 (数据集：KP_15	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 880
-
-
-[INFO] 迭代结束 (数据集：KP_16	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 1048
-[INFO] 迭代结束 (数据集：KP_16	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 1048
-[INFO] 迭代结束 (数据集：KP_16	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 1048
-[INFO] 迭代结束 (数据集：KP_16	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 1048
-[INFO] 迭代结束 (数据集：KP_16	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 1048
-[INFO] 迭代结束 (数据集：KP_16	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 1048
-[INFO] 迭代结束 (数据集：KP_16	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 1048
-[INFO] 迭代结束 (数据集：KP_16	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 1048
-
-
-[INFO] 迭代结束 (数据集：KP_17	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 1004
-[INFO] 迭代结束 (数据集：KP_17	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 1004
-[INFO] 迭代结束 (数据集：KP_17	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 1004
-[INFO] 迭代结束 (数据集：KP_17	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 1004
-[INFO] 迭代结束 (数据集：KP_17	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 1004
-[INFO] 迭代结束 (数据集：KP_17	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 1004
-[INFO] 迭代结束 (数据集：KP_17	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 1004
-[INFO] 迭代结束 (数据集：KP_17	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 1004
-
-
-[INFO] 迭代结束 (数据集：KP_18	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 1318
-[INFO] 迭代结束 (数据集：KP_18	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 1318
-[INFO] 迭代结束 (数据集：KP_18	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 1318
-[INFO] 迭代结束 (数据集：KP_18	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 1318
-[INFO] 迭代结束 (数据集：KP_18	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 1318
-[INFO] 迭代结束 (数据集：KP_18	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 1318
-[INFO] 迭代结束 (数据集：KP_18	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 1318
-[INFO] 迭代结束 (数据集：KP_18	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 1317
-
-
-[INFO] 迭代结束 (数据集：KP_19	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 1424
-[INFO] 迭代结束 (数据集：KP_19	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 1424
-[INFO] 迭代结束 (数据集：KP_19	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 1424
-[INFO] 迭代结束 (数据集：KP_19	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 1424
-[INFO] 迭代结束 (数据集：KP_19	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 1424
-[INFO] 迭代结束 (数据集：KP_19	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 1424
-[INFO] 迭代结束 (数据集：KP_19	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 1424
-[INFO] 迭代结束 (数据集：KP_19	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 1423
-
-
-[INFO] 迭代结束 (数据集：KP_20	转移函数：TransferFuncion.V1)-最优解 Ceq_avg_fit: 1432
-[INFO] 迭代结束 (数据集：KP_20	转移函数：TransferFuncion.V2)-最优解 Ceq_avg_fit: 1432
-[INFO] 迭代结束 (数据集：KP_20	转移函数：TransferFuncion.V3)-最优解 Ceq_avg_fit: 1432
-[INFO] 迭代结束 (数据集：KP_20	转移函数：TransferFuncion.V4)-最优解 Ceq_avg_fit: 1432
-[INFO] 迭代结束 (数据集：KP_20	转移函数：TransferFuncion.S1)-最优解 Ceq_avg_fit: 1432
-[INFO] 迭代结束 (数据集：KP_20	转移函数：TransferFuncion.S2)-最优解 Ceq_avg_fit: 1432
-[INFO] 迭代结束 (数据集：KP_20	转移函数：TransferFuncion.S3)-最优解 Ceq_avg_fit: 1430
-[INFO] 迭代结束 (数据集：KP_20	转移函数：TransferFuncion.S4)-最优解 Ceq_avg_fit: 1425
 result:
-[[ 268.  268.  268.  268.  268.  268.  268.  268.]
- [ 876.  876.  876.  876.  876.  876.  876.  876.]
- [  17.   17.   17.   17.   17.   17.   17.   17.]
- [  10.   10.   10.   10.   10.   10.   10.   10.]
- [ 375.  375.  375.  375.  375.  375.  375.  375.]
- [  58.   58.   58.   58.   58.   58.   58.   58.]
- [  48.   48.   48.   48.   48.   48.   48.   48.]
- [9776. 9776. 9776. 9776. 9776. 9776. 9776. 9776.]
- [  72.   72.   72.   72.   72.   72.   72.   72.]
- [ 878.  878.  878.  878.  878.  878.  878.  878.]
- [ 576.  576.  576.  576.  576.  576.  576.  576.]
- [ 654.  654.  654.  654.  654.  654.  654.  654.]
- [ 818.  818.  818.  818.  818.  818.  818.  818.]
- [ 906.  906.  906.  906.  906.  906.  906.  906.]
- [ 880.  880.  880.  880.  880.  880.  880.  880.]
- [1048. 1048. 1048. 1048. 1048. 1048. 1048. 1048.]
- [1004. 1004. 1004. 1004. 1004. 1004. 1004. 1004.]
- [1318. 1318. 1318. 1318. 1318. 1318. 1318. 1317.]
- [1424. 1424. 1424. 1424. 1424. 1424. 1424. 1423.]
- [1432. 1432. 1432. 1432. 1432. 1432. 1430. 1425.]]
+[[ 295.  295.  295.  295.  295.  295.  295.  295.]
+ [ 976.  976.  976.  976.  976.  976.  976.  976.]
+ [  35.   35.   35.   35.   35.   35.   35.   35.]
+ [  23.   23.   23.   23.   23.   23.   23.   23.]
+ [ 481.  481.  481.  481.  481.  481.  481.  481.]
+ [  52.   52.   52.   52.   52.   52.   52.   52.]
+ [ 107.  107.  107.  107.  107.  107.  107.  107.]
+ [9767. 9767. 9767. 9767. 9767. 9767. 9767. 9767.]
+ [ 130.  130.  130.  130.  130.  130.  130.  130.]
+ [1025. 1025. 1025. 1025. 1025. 1025. 1025. 1025.]
+ [1378. 1402. 1422. 1437. 1437. 1437. 1437. 1437.]
+ [1666. 1671. 1676. 1675. 1689. 1689. 1689. 1689.]
+ [1686. 1645. 1774. 1751. 1806. 1816. 1810. 1809.]
+ [1764. 1772. 1911. 1895. 2002. 1979. 2033. 1976.]
+ [2095. 2209. 2294. 2330. 2431. 2421. 2416. 2401.]
+ [2346. 2316. 2397. 2490. 2647. 2556. 2607. 2518.]
+ [2361. 2355. 2493. 2698. 2844. 2831. 2830. 2820.]
+ [2249. 2254. 2495. 2510. 2724. 2650. 2710. 2641.]
+ [2784. 2531. 2646. 2724. 3127. 3031. 3064. 3015.]
+ [2769. 2751. 3076. 3073. 3466. 3392. 3414. 3378.]]
+进程已结束,退出代码0
