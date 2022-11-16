@@ -1,6 +1,6 @@
 # ------*------ coding: utf-8 ------*------
 # @Time    : 2022/11/9 15:41
-# @Author  : 冰糖雪狸 (NekoSilverfox)
+# @Author  : Мэн Цзянин (冰糖雪狸 | NekoSilverfox)
 # @Project : Binary-Equilibrium-OA
 # @File    : main.py
 # @Software: PyCharm
@@ -32,9 +32,8 @@ def enablePrint():
     sys.stdout = sys.__stdout__
 
 
-# 转移函数 V-Shape 和 S-Shape
 class TransferFuncion(Enum):
-    """转移函数 V-Shape 和 S-Shape的枚举值"""
+    """значения для передаточных функций V-Shaped и S-Shapes"""
     V1 = 1
     V2 = 2
     V3 = 3
@@ -46,14 +45,14 @@ class TransferFuncion(Enum):
 
 
 def transfer_function(transfer_function_type: TransferFuncion, a: float) -> float:
-    """将值映射到 [0, 1] 区间的 8 种转移函数（4 种 V-Shape 和 4 种 S-Shape）
+    """8 передаточных функций (4 V-Shapes и 4 S-Shapes), которые отображают значения на интервал [0, 1]
 
     Args:
-        transfer_function_type (TransferFuncion): 转移函数类型
-        a (float): 任意实数值
+        transfer_function_type (Transfer Function): Тип передаточной функции
+        a (float): Произвольные реальные значения
 
     Returns:
-        float: 经过转移函数映射到 [0, 1] 区间的值
+        float: Значения, отображаемые на интервал [0, 1] передаточной функцией
     """
     if transfer_function_type == TransferFuncion.V1:
         return abs((2 / pi) * atan((pi / 2) * a))
@@ -85,7 +84,7 @@ def transfer_function(transfer_function_type: TransferFuncion, a: float) -> floa
 
 
 def initialization(Particles_no: int, dim: int) -> np.ndarray:
-    """生成一个 Particles_no 行，dim 列的数组 C
+    """Сгенерируйте случайный бинарный массив Particles_no строк и dim столбцов C
 
     Args:
         Particles_no (int): _description_
@@ -116,15 +115,16 @@ def arr2bin(arr: np.ndarray, tf: TransferFuncion) -> np.ndarray:
 
 
 def get_price_table(n: int, min_price: int, max_price: int) -> np.ndarray:
-    """生成物品价值表（n行，1列），也就是对应 n 个物品。价值的范围为：[min_price, max_price]
+    """Сгенерируйте таблицу случайных значений элементов (n строк, 1 столбец),
+    т.е. соответствующих n элементам. Диапазон значений: [min_price, max_price].
 
     Args:
-        n (int): 物品数量
-        min_price (int): 最小价值（大于 0）
-        max_price (int): 最大价值（大于最小价值）
+        n (int): Количество предметов
+        min_price (int): Минимальное значение (больше 0)
+        max_price (int): Максимальное значение (больше минимального)
 
     Returns:
-        np.ndarray: 一维数组
+        np.ndarray: Одномерные массивы
     """
     if n < 0:
         print('[ERROR] n CAN NOT small than 1')
@@ -138,15 +138,16 @@ def get_price_table(n: int, min_price: int, max_price: int) -> np.ndarray:
 
 
 def get_weight_table(n: int, min_weight: int, max_weight: int) -> np.ndarray:
-    """生成物品重量表（n行，1列），也就是对应 n 个物品。重量的范围为：[min_weight, max_weight]
+    """Сгенерируйте случайную таблицу весов элементов (n строк, 1 столбец),
+    т.е. соответствующих n элементам. Диапазон весов: [min_weight, max_weight].
 
     Args:
-        n (int): 物品熟练
-        min_weight (int): 最小重量（大于 0）
-        max_weight (int): 最大重量（大于最小重量）
+        n (int): Количество предметов
+        min_weight (int): Минимальный вес (больше 0)
+        max_weight (int): Максимальный вес (больше минимального)
 
     Returns:
-        np.ndarray: 一维数组
+        np.ndarray: Одномерные массивы
     """
     if n < 0:
         print('[ERROR] n CAN NOT small than 1')
@@ -161,16 +162,18 @@ def get_weight_table(n: int, min_weight: int, max_weight: int) -> np.ndarray:
 
 def get_fitness(arr_binary: np.ndarray, arr_price: np.ndarray, arr_weight: np.ndarray,
                 knapsack_capacity: int) -> int:
-    """【Fitness function】获取适应度，也就是放入背包的物品。如果不能放入背包则适应度为负数（惩罚函数）
+    """[Fitness function] Получает приспособленность, который представляет собой общую ценность предметов,
+    помещенных в рюкзак. Если общая объем больше, чем объем рюкзака, вызовите функцию штрафа, чтобы установить
+    приспособленность на отрицательное число.
 
     Args:
-        arr_binary (np.ndarray): 二元化后的数组
-        arr_price (np.ndarray): 价值数组
-        arr_weight (np.ndarray): 重量数组
-        knapsack_capacity (int): 背包容量
+        arr_binary (np.ndarray): Массив после бинаризации (группы частиц)
+        arr_price (np.ndarray): Массив ценностей
+        arr_weight (np.ndarray): Массив весов
+        knapsack_capacity (int): Объем рюкзака
 
     Returns:
-        np.int32: 适应度
+        int: Приспособленность
     """
     if arr_binary.shape != arr_price.shape or arr_price.shape != arr_weight.shape:
         print('[ERROR] arr_binary, arr_price, arr_weight should have same shape')
@@ -191,40 +194,40 @@ def get_fitness(arr_binary: np.ndarray, arr_price: np.ndarray, arr_weight: np.nd
 
 
 def get_index_max_price(arr_price: np.ndarray) -> int:
-    """获取最大价值物品的下标
+    """Получить подстрочный индекс элемента с наибольшим значением
 
     Args:
-        arr_price (np.ndarray): 存储物品价值的数组
+        arr_price (np.ndarray): Массивы для хранения стоимости предметов
 
     Returns:
-        int: 最大价值物品的下标
+        int: Подстрочный индекс для элементов с максимальным значением
     """
     return arr_price.tolist().index(arr_price.max())
 
 
 def get_index_min_price(arr_price: np.ndarray) -> int:
-    """获取最小价值物品的下标
+    """Получить подстрочный индекс предмета с минимальным значением
 
     Args:
-        arr_price (np.ndarray): 存储物品价值的数组
+        arr_price (np.ndarray): Массивы для хранения ценности предметов
 
     Returns:
-        int: 最小价值物品的下标
+        int: индекс предмета с минимальным значением
     """
     return arr_price.tolist().index(arr_price.mix())
 
 
 def get_index_max_cost_performance(arr_binary: np.ndarray, arr_price: np.ndarray, arr_weight: np.ndarray) -> int:
-    """返回不在背包中性价比最大物品的下标
-    性价比：p_i/w_i
+    """Вернуть подсписок самого большого производительности предмета, которого нет в рюкзаке
+    производительность：p_i/w_i
 
     Args:
-        arr_binary (np.ndarray): 二元化后的数组（一维）
-        arr_price (np.ndarray): 价值数组
-        arr_weight (np.ndarray): 重量数组
+        arr_binary (np.ndarray): Массив после бинаризации (одномерные)
+        arr_price (np.ndarray): Массив ценностей
+        arr_weight (np.ndarray): Массив весов
 
     Returns:
-        int: 不在背包中性价比最大物品的下标
+        int: Абонементы для наиболее производительности предметов, не входящих в рюкзак
     """
     if arr_binary.shape != arr_price.shape or arr_price.shape != arr_weight.shape:
         print('[ERROR] arr_binary, arr_price, arr_weight should have same shape')
@@ -245,16 +248,16 @@ def get_index_max_cost_performance(arr_binary: np.ndarray, arr_price: np.ndarray
 
 
 def get_index_min_cost_performance(arr_binary: np.ndarray, arr_price: np.ndarray, arr_weight: np.ndarray) -> int:
-    """返回背包中性价比最小物品的下标
-    性价比：p_i/w_i
+    """Верните подписку наименее производительности предмета в вашем рюкзаке
+    производительность：p_i/w_i
 
     Args:
-        arr_binary (np.ndarray): 二元化后的数组（一维）
-        arr_price (np.ndarray): 价值数组
-        arr_weight (np.ndarray): 重量数组
+        arr_binary (np.ndarray): Массив после бинаризации (одномерные)
+        arr_price (np.ndarray): Массив ценностей
+        arr_weight (np.ndarray): Массив весов
 
     Returns:
-        int: 背包中性价比最小物品的下标
+        int: Подпись для наименее производительности предмета в рюкзаке
     """
     if arr_binary.shape != arr_price.shape or arr_price.shape != arr_weight.shape:
         print('[ERROR] arr_binary, arr_price, arr_weight should have same shape')
@@ -276,16 +279,17 @@ def get_index_min_cost_performance(arr_binary: np.ndarray, arr_price: np.ndarray
 
 def repari_alg(arr_binary: np.ndarray, arr_price: np.ndarray, arr_weight: np.ndarray,
                knapsack_capacity: int) -> np.ndarray:
-    """RA - 修复算法，其作用是修正PF算法（惩罚函数）返回的不可行解。并「返回」修复后的新组
+    """Алгоритм исправления  (RA, Repair Algorithm), который служит для исправления невыполнимых решений, возвращаемых
+    алгоритмом PF (штрафная функция). и "вернуть" восстановленный новый массив
 
     Args:
-        arr_binary (np.ndarray): 二元化后的数组（一维）
-        arr_price (np.ndarray): 价值数组
-        arr_weight (np.ndarray): 重量数组
-        knapsack_capacity (int): 背包容量
+        arr_binary (np.ndarray): Массив после бинаризации (одномерные)
+        arr_price (np.ndarray): Массив ценностей
+        arr_weight (np.ndarray): Массив весов
+        knapsack_capacity (int): Объем рюкзака
 
     Returns:
-        np.ndarray: RA 算法修复后的新行（一维数组）
+        np.ndarray: Новый массив после восстановления алгоритма RA (одномерный массив)
     """
     arr_binary = copy(arr_binary)
     while get_fitness(arr_binary, arr_price, arr_weight, knapsack_capacity) < 0:
@@ -297,17 +301,18 @@ def repari_alg(arr_binary: np.ndarray, arr_price: np.ndarray, arr_weight: np.nda
 
 def improvement_alg(arr_binary: np.ndarray, arr_price: np.ndarray, arr_weight: np.ndarray,
                     knapsack_capacity: int) -> np.ndarray:
-    """IM - 改进算法，其作用是改进RA（修复算法）返回的可行解。并「返回」改进后的新组
+    """Алгоритм улучшения (IA, Improvement Algorithm), который служит для улучшения выполнимого решения, возвращаемого RA (алгоритмом исправления).
+    и "вернуть" новый улучшенный массив
     Args:
-        arr_binary (np.ndarray): 二元化后的数组（一维）
-        arr_price (np.ndarray): 价值数组
-        arr_weight (np.ndarray): 重量数组
-        knapsack_capacity (int): 背包容量
+        arr_binary (np.ndarray): Массив после бинаризации (одномерные)
+        arr_price (np.ndarray): Массив ценностей
+        arr_weight (np.ndarray): Массив весов
+        knapsack_capacity (int): Объем рюкзака
     Returns:
-        np.ndarray: IM 算法改进后的新行（一维数组）
+        np.ndarray: Новый массив после улучшения алгоритма IM (одномерные массивы)
     """
     arr_binary = copy(arr_binary)
-    last_array = copy(arr_binary)  # 暂存改进前的数组
+    last_array = copy(arr_binary)  # Массив перед временными улучшениями
     while get_fitness(arr_binary, arr_price, arr_weight, knapsack_capacity) > 0:
         last_array = copy(arr_binary)
         index_max_cp = get_index_max_cost_performance(arr_binary, arr_price, arr_weight)
@@ -344,48 +349,47 @@ def printSV():
 
 
 def BiEO(tf: TransferFuncion, arr_price: np.ndarray, arr_weight: np.ndarray, knapsack_capacity: int,
-         num_groups_particle: int, num_runs: int, max_iters: int, a_1: int, a_2: int, GP: float) -> np.ndarray:
+         num_groups_particle: int, max_iters: int, a_1: int, a_2: int, GP: float) -> np.ndarray:
+
     """
-    二元优化算法
-    :param tf: 转移函数
-    :param arr_price:  价值表
-    :param arr_weight: 重量表
-    :param knapsack_capacity: 背包容量
-    :param num_groups_particle: 粒子群数量
-    :param num_runs: 运行次数
-    :param max_iters: 最大迭代次数
-    :param a_1: 探索能力
-    :param a_2: 开发能力
-    :param GP: 生成率
-    :return: 最终取得的候选池 (Ceq, pool)
+    Алгоритм оптимизации бинарного равновесия
+    :param tf: Передаточная функция
+    :param arr_price:  Массив ценностей
+    :param arr_weight: Массив весов
+    :param knapsack_capacity: Объем рюкзака
+    :param num_groups_particle: Количество роев частиц
+    :param max_iters: Максимальное количество итераций
+    :param a_1: Способность к исследованию
+    :param a_2: Способность к эксплуатации
+    :param GP: Коэффициент генерации
+    :return: Получен конечный результат равновесный бассейн и кандидаты (Equilibrium pool and candidates)
     """
 
-    print('\n[INFO] -------------- 初始化变量 --------------')
+    print('\n[INFO] -------------- Инициализация переменных --------------')
     num_particles_every_group = arr_weight.shape[0]  # (dim)
-    print(f'初始化背包：\n'
-          f'\t背包体积: {knapsack_capacity}\n'
-          f'\t粒子组数量: {num_groups_particle}\n'
-          f'\t每组中物品个数(dim维度): {num_particles_every_group}\n')
+    print(f'Инициализация рюкзака：\n'
+          f'\tОбъем рюкзака: {knapsack_capacity}\n'
+          f'\tКоличество групп частиц: {num_groups_particle}\n'
+          f'\tКоличество предметов в каждой группе (размерность): {num_particles_every_group}\n')
 
-    print('\n[INFO] -------------- 价值表 --------------')
+    print('\n[INFO] -------------- Массив ценностей --------------')
     print(f'{arr_price}')
 
-    print('\n[INFO] -------------- 重量表 --------------')
+    print('\n[INFO] -------------- Массив весов --------------')
     print(f'{arr_weight}')
 
-    print(f'初始化 BiEO 参数：\n'
-          f'\t运行次数: {num_runs}\n'
-          f'\t每次运行中迭代次数: {max_iters}\n'
+    print(f'Инициализация параметров BiEO：\n'
+          f'\tМаксимальное количество итераций: {max_iters}\n'
           f'\ta_1: {a_1}\n'
           f'\ta_2: {a_2}\n'
-          f'\t转移函数: {tf}\n'
+          f'\tПередаточная функция: {tf}\n'
           f'\tGP: {GP}')
 
-    print('\n[INFO] -------------- 初始化粒子群C --------------')
-    C = initialization(num_groups_particle, num_particles_every_group)  # 0-1 值，物品是否放入背包
+    print('\n[INFO] -------------- Инициализация роя частиц C --------------')
+    C = initialization(num_groups_particle, num_particles_every_group)  #  значение 0-1, помещается ли предмет в рюкзак
     print(f'C: {C}')
 
-    print('\n[INFO] -------------- 初始化均衡池粒子群 Ceq_1 ~ Ceq_4 --------------')
+    print('\n[INFO] -------------- Инициализация роя частиц равновесного бассейна Ceq_1 ~ Ceq_4 --------------')
     Ceq_1 = np.zeros(num_particles_every_group)
     Ceq_1_fit = float('-inf')
     Ceq_2 = np.zeros(num_particles_every_group)
@@ -405,17 +409,17 @@ def BiEO(tf: TransferFuncion, arr_price: np.ndarray, arr_weight: np.ndarray, kna
           f'\tCeq_1: {Ceq_4}\n'
           )
 
-    print('=============================== BiEO 开始迭代 ===============================')
+    print('=============================== BiEO Начало итерации ===============================')
     it = 1
     C_pool = None
     while it <= max_iters:
-        print(f'\n[INFO] -------------------- 当前迭代 {it}/{max_iters} --------------------')
+        print(f'\n[INFO] -------------------- Текущая итерация {it}/{max_iters} --------------------')
 
         for i in range(C.shape[0]):
             C[i] = arr2bin(arr=C[i], tf=tf)
             fitness = get_fitness(arr_binary=C[i], arr_price=arr_price, arr_weight=arr_weight,
                                   knapsack_capacity=knapsack_capacity)
-            print(f'\n[INFO] 当前粒子群适应度：{fitness}')
+            print(f'\n[INFO] Текущая приспособленность роя частиц：{fitness}')
 
             if fitness < 0:
                 C[i] = repari_alg(arr_binary=C[i], arr_price=arr_price, arr_weight=arr_weight,
@@ -424,7 +428,7 @@ def BiEO(tf: TransferFuncion, arr_price: np.ndarray, arr_weight: np.ndarray, kna
                                        knapsack_capacity=knapsack_capacity)
                 fitness = get_fitness(arr_binary=C[i], arr_price=arr_price, arr_weight=arr_weight,
                                       knapsack_capacity=knapsack_capacity)
-                print(f'[INFO] 调用 RA & IA 且更新后适应度：{fitness}')
+                print(f'[INFO] Приспособленность после обращения в RA и IA：{fitness}')
 
             if fitness > Ceq_1_fit:
                 # print('[INFO] Update Ceq_1')
@@ -443,17 +447,17 @@ def BiEO(tf: TransferFuncion, arr_price: np.ndarray, arr_weight: np.ndarray, kna
                 Ceq_4_fit = fitness
                 Ceq_4 = copy(C[i])
             else:
-                # print('[INFO] 未更新 Ceq')
+                # print('[INFO] Не обновлено Ceq')
                 pass
-            print(f'[INFO] 当前Ceq1 ~ Ceq_4 候选者适应度: \n'
+            print(f'[INFO] Текущая приспособленность Ceq1 ~ Ceq4: \n'
                   f'\tCeq_1_fit: {Ceq_1_fit}\n'
                   f'\tCeq_2_fit: {Ceq_2_fit}\n'
                   f'\tCeq_3_fit: {Ceq_3_fit}\n'
                   f'\tCeq_4_fit: {Ceq_4_fit}\n')
 
-        Ceq_ave = np.round((Ceq_1 + Ceq_2 + Ceq_3 + Ceq_4) / 4)  # 均衡池候选者的平均值
-        C_pool = np.array([Ceq_1, Ceq_2, Ceq_3, Ceq_4, Ceq_ave])  # 均衡池
-        print(f'[INFO] 当前均衡池: \n'
+        Ceq_ave = np.round((Ceq_1 + Ceq_2 + Ceq_3 + Ceq_4) / 4)  # Среднее значение кандидатов в равновесном бассейне
+        C_pool = np.array([Ceq_1, Ceq_2, Ceq_3, Ceq_4, Ceq_ave])  # Равновесный бассейн
+        print(f'[INFO] Текущий равновесный бассейн: \n'
               f'\tCeq_1: {C_pool[0]}\t|\tCeq_1_fit: {Ceq_1_fit}\n'
               f'\tCeq_2: {C_pool[1]}\t|\tCeq_2_fit: {Ceq_2_fit}\n'
               f'\tCeq_3: {C_pool[2]}\t|\tCeq_3_fit: {Ceq_3_fit}\n'
@@ -462,7 +466,7 @@ def BiEO(tf: TransferFuncion, arr_price: np.ndarray, arr_weight: np.ndarray, kna
 
         t = (1 - it / max_iters) ** (a_2 * it / max_iters)  # Eq(4)
         for i in range(C.shape[0]):
-            Ceq = C_pool[np.random.randint(C_pool.shape[0])]  # 从均衡池中随机抽取一个
+            Ceq = C_pool[np.random.randint(C_pool.shape[0])]  # Один случайный выбор из равновесного бассейна
             lambda_F = np.random.random(num_particles_every_group)
             r = np.random.random(num_particles_every_group)
             F = a_1 * np.sign(r - 0.5) * (np.exp(-lambda_F * t) - 1)  # Eq(6)
@@ -473,7 +477,7 @@ def BiEO(tf: TransferFuncion, arr_price: np.ndarray, arr_weight: np.ndarray, kna
 
         it += 1
 
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 迭代结束 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Конец итерации @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
     print(f'4个最优解：\n'
           f'\tCeq_1: {C_pool[0]}\t|\tCeq_1_fit: {Ceq_1_fit}\n'
           f'\tCeq_2: {C_pool[1]}\t|\tCeq_2_fit: {Ceq_2_fit}\n'
@@ -488,7 +492,7 @@ if __name__ == '__main__':
     print('==================== main start ====================')
 
     # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 在此设置参数 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Установите параметры здесь @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
@@ -509,14 +513,13 @@ if __name__ == '__main__':
             print('\n')
 
             for j in range(8):
-                """调用 BiEO 算法"""
+                """Вызов алгоритма BiEO"""
                 blockPrint()
                 C_pool = BiEO(tf=arr_tf[j],
                               arr_price=arr_v[i],
                               arr_weight=arr_w[i],
                               knapsack_capacity=arr_kp_c[i],
                               num_groups_particle=20,  # [20]
-                              num_runs=20,  # [20]
                               max_iters=5000,  # [5000]
                               a_1=1,  # [3]
                               a_2=3,  # [1]
@@ -526,7 +529,7 @@ if __name__ == '__main__':
                 # print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 迭代结束 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
                 cur_best_fitness = round(get_fitness(C_pool[0], arr_v[i], arr_w[i], arr_kp_c[i]))
                 cur_res[i, j] = cur_best_fitness
-                print(f'[INFO] run:{num_run} 迭代结束 (数据集：KP_{i + 1}\t转移函数：{arr_tf[j]})-最优解 Ceq_avg_fit: {cur_best_fitness}')
+                print(f'[INFO] run:{num_run} Конец итерации (Набор данных：KP_{i + 1}\tПередаточная функция：{arr_tf[j]})-Оптимальное решение Ceq_avg_fit: {cur_best_fitness}')
         arr_res = np.maximum(arr_res, cur_res)
 
     print(f'result:\n{arr_res}')

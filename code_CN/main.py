@@ -32,7 +32,6 @@ def enablePrint():
     sys.stdout = sys.__stdout__
 
 
-# 转移函数 V-Shape 和 S-Shape
 class TransferFuncion(Enum):
     """转移函数 V-Shape 和 S-Shape的枚举值"""
     V1 = 1
@@ -85,7 +84,7 @@ def transfer_function(transfer_function_type: TransferFuncion, a: float) -> floa
 
 
 def initialization(Particles_no: int, dim: int) -> np.ndarray:
-    """生成一个 Particles_no 行，dim 列的数组 C
+    """生成一个 Particles_no 行，dim 列的随机数组 C
 
     Args:
         Particles_no (int): _description_
@@ -116,7 +115,7 @@ def arr2bin(arr: np.ndarray, tf: TransferFuncion) -> np.ndarray:
 
 
 def get_price_table(n: int, min_price: int, max_price: int) -> np.ndarray:
-    """生成物品价值表（n行，1列），也就是对应 n 个物品。价值的范围为：[min_price, max_price]
+    """生成随机物品价值表（n行，1列），也就是对应 n 个物品。价值的范围为：[min_price, max_price]
 
     Args:
         n (int): 物品数量
@@ -138,10 +137,10 @@ def get_price_table(n: int, min_price: int, max_price: int) -> np.ndarray:
 
 
 def get_weight_table(n: int, min_weight: int, max_weight: int) -> np.ndarray:
-    """生成物品重量表（n行，1列），也就是对应 n 个物品。重量的范围为：[min_weight, max_weight]
+    """生成随机物品重量表（n行，1列），也就是对应 n 个物品。重量的范围为：[min_weight, max_weight]
 
     Args:
-        n (int): 物品熟练
+        n (int): 物品数量
         min_weight (int): 最小重量（大于 0）
         max_weight (int): 最大重量（大于最小重量）
 
@@ -161,10 +160,10 @@ def get_weight_table(n: int, min_weight: int, max_weight: int) -> np.ndarray:
 
 def get_fitness(arr_binary: np.ndarray, arr_price: np.ndarray, arr_weight: np.ndarray,
                 knapsack_capacity: int) -> int:
-    """【Fitness function】获取适应度，也就是放入背包的物品。如果不能放入背包则适应度为负数（惩罚函数）
+    """【Fitness function】获取适应度，也就是放入背包的物品的总价值。如果总容量大于背包容量则调用惩罚函数置适应度为负数
 
     Args:
-        arr_binary (np.ndarray): 二元化后的数组
+        arr_binary (np.ndarray): 二元化后的数组(粒子群组)
         arr_price (np.ndarray): 价值数组
         arr_weight (np.ndarray): 重量数组
         knapsack_capacity (int): 背包容量
@@ -276,7 +275,7 @@ def get_index_min_cost_performance(arr_binary: np.ndarray, arr_price: np.ndarray
 
 def repari_alg(arr_binary: np.ndarray, arr_price: np.ndarray, arr_weight: np.ndarray,
                knapsack_capacity: int) -> np.ndarray:
-    """RA - 修复算法，其作用是修正PF算法（惩罚函数）返回的不可行解。并「返回」修复后的新组
+    """RA - 修复算法，其作用是修正PF算法（惩罚函数）返回的不可行解。并「返回」修复后的新数组
 
     Args:
         arr_binary (np.ndarray): 二元化后的数组（一维）
@@ -285,7 +284,7 @@ def repari_alg(arr_binary: np.ndarray, arr_price: np.ndarray, arr_weight: np.nda
         knapsack_capacity (int): 背包容量
 
     Returns:
-        np.ndarray: RA 算法修复后的新行（一维数组）
+        np.ndarray: RA 算法修复后的新数组（一维数组）
     """
     arr_binary = copy(arr_binary)
     while get_fitness(arr_binary, arr_price, arr_weight, knapsack_capacity) < 0:
@@ -297,14 +296,14 @@ def repari_alg(arr_binary: np.ndarray, arr_price: np.ndarray, arr_weight: np.nda
 
 def improvement_alg(arr_binary: np.ndarray, arr_price: np.ndarray, arr_weight: np.ndarray,
                     knapsack_capacity: int) -> np.ndarray:
-    """IM - 改进算法，其作用是改进RA（修复算法）返回的可行解。并「返回」改进后的新组
+    """IM - 改进算法，其作用是改进RA（修复算法）返回的可行解。并「返回」改进后的新数组
     Args:
         arr_binary (np.ndarray): 二元化后的数组（一维）
         arr_price (np.ndarray): 价值数组
         arr_weight (np.ndarray): 重量数组
         knapsack_capacity (int): 背包容量
     Returns:
-        np.ndarray: IM 算法改进后的新行（一维数组）
+        np.ndarray: IM 算法改进后的新数组（一维数组）
     """
     arr_binary = copy(arr_binary)
     last_array = copy(arr_binary)  # 暂存改进前的数组
