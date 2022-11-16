@@ -301,15 +301,11 @@ def repari_alg(arr_binary: np.ndarray, arr_price: np.ndarray, arr_weight: np.nda
 
 def improvement_alg(arr_binary: np.ndarray, arr_price: np.ndarray, arr_weight: np.ndarray,
                     knapsack_capacity: int) -> np.ndarray:
-    """Алгоритм улучшения (IA, Improvement Algorithm), который служит для улучшения выполнимого решения, возвращаемого RA (алгоритмом исправления).
-    и "вернуть" новый улучшенный массив
-    Args:
-        arr_binary (np.ndarray): Массив после бинаризации (одномерные)
-        arr_price (np.ndarray): Массив ценностей
-        arr_weight (np.ndarray): Массив весов
-        knapsack_capacity (int): Объем рюкзака
-    Returns:
-        np.ndarray: Новый массив после улучшения алгоритма IM (одномерные массивы)
+    """Алгоритм улучшения (IA, Improvement Algorithm), который служит для улучшения выполнимого решения,
+    возвращаемого RA (алгоритмом исправления). и "вернуть" новый улучшенный массив Args: arr_binary (np.ndarray):
+    Массив после бинаризации (одномерные) arr_price (np.ndarray): Массив ценностей arr_weight (np.ndarray): Массив
+    весов knapsack_capacity (int): Объем рюкзака Returns: np.ndarray: Новый массив после улучшения алгоритма IM (
+    одномерные массивы)
     """
     arr_binary = copy(arr_binary)
     last_array = copy(arr_binary)  # Массив перед временными улучшениями
@@ -478,7 +474,7 @@ def BiEO(tf: TransferFuncion, arr_price: np.ndarray, arr_weight: np.ndarray, kna
         it += 1
 
     print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Конец итерации @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-    print(f'4个最优解：\n'
+    print(f'4 оптимальных решения：\n'
           f'\tCeq_1: {C_pool[0]}\t|\tCeq_1_fit: {Ceq_1_fit}\n'
           f'\tCeq_2: {C_pool[1]}\t|\tCeq_2_fit: {Ceq_2_fit}\n'
           f'\tCeq_3: {C_pool[2]}\t|\tCeq_3_fit: {Ceq_3_fit}\n'
@@ -521,12 +517,12 @@ if __name__ == '__main__':
                               knapsack_capacity=arr_kp_c[i],
                               num_groups_particle=20,  # [20]
                               max_iters=5000,  # [5000]
-                              a_1=1,  # [3]
-                              a_2=3,  # [1]
+                              a_1=3,  # [3]
+                              a_2=1,  # [1]
                               GP=0.5)
                 enablePrint()
 
-                # print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 迭代结束 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+                # print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Конец итерации @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
                 cur_best_fitness = round(get_fitness(C_pool[0], arr_v[i], arr_w[i], arr_kp_c[i]))
                 cur_res[i, j] = cur_best_fitness
                 print(f'[INFO] run:{num_run} Конец итерации (Набор данных：KP_{i + 1}\tПередаточная функция：{arr_tf[j]})-Оптимальное решение Ceq_avg_fit: {cur_best_fitness}')
